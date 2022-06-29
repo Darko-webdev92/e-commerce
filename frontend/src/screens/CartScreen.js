@@ -62,7 +62,7 @@ const CartScreen = {
                 <div class="col-md-8">
                   <div class="card mb-4">
                     <div class="card-header py-3">
-                      <h5 class="mb-0">Cart - 2 items</h5>
+                      <h5 class="mb-0">Cart - ${cartItem.length} items</h5>
                     </div>
                     <div class="card-body">
                     ${cartItem.length == 0 ? '<div class="row"> </div>' : cartItem.map(item=>`

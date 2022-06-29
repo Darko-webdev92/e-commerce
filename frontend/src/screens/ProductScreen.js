@@ -2,7 +2,6 @@ import getProduct from "../api.js";
 import { parseRequestUrl } from "../utils.js";
 
  function mainImage(product){
-    alert("this is this " + this);
    return` <div class="main_image">
     <img src="${product.thumbnail}" id="main_product_image" width="350">
     </div>
@@ -43,7 +42,7 @@ const ProductScreen = {
             <ul id="thumbnail">
             ${product.images.map(image =>
                 `
-                <li><img onclick="alert(${this})" src="${image}" width="70"></li>
+                <li><img onclick="" src="${image}" width="70"></li>
                 `).join('\n')}
             </ul>
             </div>
