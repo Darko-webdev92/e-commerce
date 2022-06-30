@@ -1,4 +1,5 @@
 import CartScreen from "./screens/CartScreen.js";
+import CategoryScreen from "./screens/CategoryScreen.js";
 import ContactScreen from "./screens/ContactScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";
 import HomeScreen from "./screens/HomeScreen.js";
@@ -10,18 +11,20 @@ const routes = {
     '/product/:id': ProductScreen,
     '/cart/:id': CartScreen,
     '/cart': CartScreen,
-    '/contact': ContactScreen
+    '/contact': ContactScreen,
+    '/category/:category': CategoryScreen
+    
 }
 
 const router =  async () =>{
     const request = parseRequestUrl();
     const parseUrl = (request.resource ? `/${request.resource}` : '/') + (request.id ? `/:id` : '') + (request.verb ? `/${request.verb}` : '');
+    console.log(request.resource);
     const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen;
     console.log(screen);
     const main = document.getElementById("main-container");
     // main.innerHTML = HomeScreen.render()
     main.innerHTML = await screen.render();
-    console.log("this is screen " + screen);
     await screen.after_render();
     
 }

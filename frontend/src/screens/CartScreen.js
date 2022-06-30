@@ -1,6 +1,6 @@
 import getProduct from "../api.js";
 import { getCartItems, setCartItems } from "../localstorage.js";
-import { parseRequestUrl } from "../utils.js";
+import { parseRequestUrl, rerender } from "../utils.js";
 
 const addToCart = (item,forceUpdate = false) =>{
     let cartItems = getCartItems();
@@ -10,14 +10,30 @@ const addToCart = (item,forceUpdate = false) =>{
         cartItems = cartItems.map(x=> x.product === existItems.product ? item : x)
     }else{
         cartItems = [...cartItems, item]
+        const cartAmount = document.getElementById('cart-amount');
+        cartAmount.innerHTML = cartItems.length;
     }
 
     setCartItems(cartItems);
 }
 
+const removeFromCart = (id) =>{
+  setCartItems(getCartItems().filter(x => x.product !== id))
+  if(id === parseRequestUrl().id){
+    document.location.hash = '#/cart';
+  }else{
+    rerender(CartScreen);
+  }
+}
 const CartScreen = {
     after_render: () =>{
 
+    const deleteBtns = document.getElementsByClassName('del-button');
+    Array.from(deleteBtns).forEach((deleteBtn) =>{
+      deleteBtn.addEventListener('click', ()=>{
+        removeFromCart(deleteBtn.id)
+      })
+    })
     },
     render: async () =>{
         const request = parseRequestUrl();
@@ -28,7 +44,9 @@ const CartScreen = {
                 name: product.name,
                 price: product.price,
                 image: product.thumbnail,
-                description: product.description
+                description: product.description,
+                stock: product.stock,
+                quantity: 1
             })
         }
         // return (
@@ -39,21 +57,6 @@ const CartScreen = {
         // )
 
         const cartItem = getCartItems();
-        // return (
-        //     `<div class="cart"> Cart Screen </div>
-        //         <div class="cart-list">
-        //         <ul> 
-        //         <li> <h3> Shopping cart </h3> <div> Price </div> </li>
-        //         ${cartItem.length === 0 ? '<div> Cart is empty. </div>' : cartItem.map(item => `
-        //         <li> <div> ${item.name} </div>
-        //         <div> ${item.price} </div> </li>
-        //         `) }
-        //         </ul>
-        //         </div>
-        //     `
-            
-        // )
-
         return (
             `
             <section class="h-100 gradient-custom">
@@ -73,7 +76,7 @@ const CartScreen = {
                         <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
                           <img src="${item.image}"
                             class="w-100" alt="${item.name}" />
-                          <a href="#!">
+                          <a href="#/product/${item.product}">
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                           </a>
                         </div>
@@ -82,15 +85,17 @@ const CartScreen = {
         
                       <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                         <!-- Data -->
-                        <p><strong>${item.name}</strong></p>
+                        <p><strong><a href="#/product/${item.product}">${item.name} </a></strong></p>
                         <p>${item.description}</p>
-                        <button type="button" class="btn btn-primary btn-sm me-1 mb-2" id="${item.product}" data-mdb-toggle="tooltip"
+                        <p>${item.stock}</p>
+                        <button type="button" class="del-button btn btn-primary btn-sm me-1 mb-2 " id="${item.product}" data-mdb-toggle="tooltip"
                           title="Remove item">
                           <i class="fas fa-trash"></i>
                         </button>
                         <!-- Data -->
                       </div>
-        
+      
+
                       <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                         <!-- Quantity -->
                         <div class="d-flex mb-4" style="max-width: 300px">
@@ -100,12 +105,12 @@ const CartScreen = {
                           </button>
         
                           <div class="form-outline">
-                            <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
+                            <input id="form1" min="1" name="quantity" max="${item.stock}" value="1" type="number" class="form-control px-3" />
                             <label class="form-label mx-3" for="form1">Quantity</label>
                           </div>
         
                           <button class="btn btn-primary px-3 ms-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp();">
                             <i class="fas fa-plus"></i>
                           </button>
                         </div>
@@ -145,9 +150,6 @@ const CartScreen = {
                       <img class="me-2" width="45px"
                         src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
                         alt="Mastercard" />
-                      <img class="me-2" width="45px"
-                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
-                        alt="PayPal acceptance mark" />
                     </div>
                   </div>
                 </div>
@@ -162,9 +164,14 @@ const CartScreen = {
                           class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                           <div>
                             <strong>Total amount</strong>
-      
                           </div>
-                          <span><strong>$53.98</strong></span>
+                          <div>
+                          <span><strong>
+                          ${cartItem.length > 0 ? cartItem.reduce((prev,current)=> prev + current.quantity, 0) : ""}
+                          ${cartItem.length == 1 ? `<span> item = </span>` : `<span> items </span>` } </span>
+                          ${cartItem.length > 0 ? cartItem.reduce((prev,current)=> prev + current.price * current.quantity, 0) + " $": ''}
+                          </strong></span>
+                          </div>
                         </li>
                       </ul>
           

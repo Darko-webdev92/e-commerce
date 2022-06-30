@@ -1,4 +1,4 @@
-const ContactScreen = {
+const CategoryScreen = {
     render: () => {
         return `
         <section class="h-100 gradient-custom">
@@ -104,4 +104,4 @@ const ContactScreen = {
     },
 }
 
-export default ContactScreen;
+export default CategoryScreen;

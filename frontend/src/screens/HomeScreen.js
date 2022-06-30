@@ -4,8 +4,8 @@ const renderCard = (product) =>{
 return `
 <div class="col-md-3 mb-4">
 <div class="card">
-<div class="bg-image  hover-zoom ripple" data-mdb-ripple-color="light">
-<img src="${product.thumbnail}"
+<div class="bg-image   hover-zoom ripple" data-mdb-ripple-color="light">
+<img  src="${product.thumbnail}"
 class="w-100 card-img-top"/>
 <a href="#!">
 <div class="mask">
@@ -34,10 +34,8 @@ ${Rating.render({value: product.rating, text: product.numReviews + ' reviews'})}
 </div>
 
 <a href="#/product/${product.id}" class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark">Details</a>
-
-<a class="btn btn-danger flex-fill ms-1">Add to Cart</a>
+<a class="btn btn-outline-primary flex-fill ms-1">Add to Cart</a>
 </div>
-
 </div>
 </div>
 `
@@ -59,7 +57,6 @@ const HomeScreen = {
         <section style="background-color: #eee;">
         <div class="container py-5">
           <h4 class="text-center mb-3 mt-4"><strong>Product categories</strong></h4>
-      
           <div class="row">
             <div class="col-lg-4 col-md-12 mb-4">
               <div class="bg-image hover-zoom ripple shadow-1-strong rounded">
@@ -74,12 +71,11 @@ const HomeScreen = {
                   <div class="hover-overlay">
                     <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
                   </div>
-           
+
                 </a>
          
               </div>
             </div>
-      
             <div class="col-lg-4 col-md-12 mb-4">
               <div class="bg-image hover-zoom ripple shadow-1-strong rounded">
                 <img src="./images/laptops.webp"
@@ -122,7 +118,7 @@ const HomeScreen = {
   `${product.category === 'smartphones' ? `
   ${renderCard(product)}`: ""}
 `).join("\n")}
-<h3 class="mb-4"> Smartphones </h3>
+<h3 class="mb-4 mt-3"> Laptops </h3>
 ${products.map(product =>
   `${product.category === 'laptops' ? `
   ${renderCard(product)}`: ""}`

@@ -1,10 +1,4 @@
 const getProduct = async (id) =>{
-    // try{
-    //  const response = 
-    // }catch(err){
-
-    // }
-
     try{
         const response = await fetch(`http://localhost:3000/products/${id}`,{
             headers: {
