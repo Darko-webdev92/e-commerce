@@ -1,6 +1,8 @@
 export const parseRequestUrl = () =>{
     const url = document.location.hash.toLowerCase();
     const request = url.split("/");
+    console.log("this is url" + url)
+    console.log("this is request" + request);
     return {
         resource: request[1],
         id: request[2],

@@ -55,7 +55,7 @@ const HomeScreen = {
         const products = await response.json();
         return `
         <section style="background-color: #eee;">
-        <div class="container py-5">
+        <div class="container py-5 mt-5">
           <h4 class="text-center mb-3 mt-4"><strong>Product categories</strong></h4>
           <div class="row">
             <div class="col-lg-4 col-md-12 mb-4">
