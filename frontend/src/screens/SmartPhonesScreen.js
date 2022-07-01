@@ -45,18 +45,13 @@ const SmartPhonesScreen = {
     render: async () =>{
         const products = await getProductByCategory('smartphones');
         return `
-        <div class="container my-5">
+        <div class="container py-5 my-5">
         <div class="row">
-        <h3 class="mb-4"> Smartphones </h3>
+        <h3 class="mb-4 text-center"> Smartphones </h3>
        ${products.map(product =>
       `${product.category === 'smartphones' ? `
       ${renderCard(product)}`: ""}
     `).join("\n")}
-    <h3 class="mb-4 mt-3"> Laptops </h3>
-    ${products.map(product =>
-      `${product.category === 'laptops' ? `
-      ${renderCard(product)}`: ""}`
-      ).join("\n")}
     </div>
     </div>
         `

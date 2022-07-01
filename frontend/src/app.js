@@ -3,6 +3,7 @@ import CategoryScreen from "./screens/CategoryScreen.js";
 import ContactScreen from "./screens/ContactScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";
 import HomeScreen from "./screens/HomeScreen.js";
+import LaptopsScreen from "./screens/LaptopsScreen.js";
 import LoginScreen from "./screens/LoginScreen.js";
 import ProductScreen from "./screens/ProductScreen.js";
 import RegisterScreen from "./screens/RegisterScreen.js";
@@ -17,8 +18,9 @@ const routes = {
     '/contact': ContactScreen,  
     '/login': LoginScreen,
     '/register': RegisterScreen,
-    // '/category': CategoryScreen,
-    '/smartphones': SmartPhonesScreen
+    '/category': CategoryScreen,
+    '/smartphones': SmartPhonesScreen,
+    '/laptops': LaptopsScreen
 
 }
 

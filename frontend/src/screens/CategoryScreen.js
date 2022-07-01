@@ -68,8 +68,6 @@ ${renderCard(product)}`: ""}`
 </div>
 </div>
 </ul>
-            ${alert(localStorage.getItem('textValue'))}
-        <p>${localStorage.getItem('textValue')}</p>
         `
     }
 }

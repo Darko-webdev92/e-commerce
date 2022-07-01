@@ -1,4 +1,3 @@
-
 const RegisterScreen = {
     render: async  () =>{
       window.scrollTo(0,0);

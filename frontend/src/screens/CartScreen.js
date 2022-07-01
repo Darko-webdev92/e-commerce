@@ -37,6 +37,7 @@ const CartScreen = {
     },
     render: async () =>{
         const request = parseRequestUrl();
+        window.scrollTo(0,0);
         if(request.id){
             const product = await getProduct(request.id);
             addToCart({
