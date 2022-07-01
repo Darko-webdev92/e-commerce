@@ -1,3 +1,4 @@
+import { getProductByCategory } from "../api.js";
 import Rating from "../components/rating.js";
 const renderCard = (product) =>{
     return `
@@ -40,38 +41,26 @@ const renderCard = (product) =>{
     `
     }
 
-const CategoryScreen = {
-    render: async  () =>{
-        const response = await fetch('http://localhost:3000/products',{
-            headers: {
-                'Content-type': 'application/json',
-            }
-        })
-        if(!response || !response.ok){
-            return '<div> Error in getting data </div>'
-        }
-        const products = await response.json();
-
+const SmartPhonesScreen = {
+    render: async () =>{
+        const products = await getProductByCategory('smartphones');
         return `
-<div class="container my-5">
-<div class="row">
-<h3 class="mb-4"> Smartphones </h3>
-${products.filter(product => product.name.includes(localStorage.getItem('textValue'))).map(product =>
-`${product.category === 'smartphones' ? `
-${renderCard(product)}`: ""}
-`).join("\n")}
-<h3 class="mb-4 mt-3"> Laptops </h3>
-${products.map(product =>
-`${product.category === 'laptops' ? `
-${renderCard(product)}`: ""}`
-).join("\n")}
-</div>
-</div>
-</ul>
-            ${alert(localStorage.getItem('textValue'))}
-        <p>${localStorage.getItem('textValue')}</p>
+        <div class="container my-5">
+        <div class="row">
+        <h3 class="mb-4"> Smartphones </h3>
+       ${products.map(product =>
+      `${product.category === 'smartphones' ? `
+      ${renderCard(product)}`: ""}
+    `).join("\n")}
+    <h3 class="mb-4 mt-3"> Laptops </h3>
+    ${products.map(product =>
+      `${product.category === 'laptops' ? `
+      ${renderCard(product)}`: ""}`
+      ).join("\n")}
+    </div>
+    </div>
         `
     }
-}
 
-export default CategoryScreen;
+}
+export default SmartPhonesScreen;

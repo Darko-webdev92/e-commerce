@@ -1,4 +1,4 @@
-import getProduct from "../api.js";
+import {getProduct} from "../api.js";
 import { parseRequestUrl } from "../utils.js";
 
  function mainImage(product){
@@ -17,6 +17,7 @@ const ProductScreen = {
      render: async  () =>{
         const request = parseRequestUrl();
         const product = await getProduct(request.id);
+        window.scrollTo(0,0);
         return `
         <div class="container py-5 my-5">
         <div class="card">

@@ -35,10 +35,10 @@
               />
             </a>
             <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">
-              <li class="nav-item d-none d-sm-block">
-                <form class="d-flex input-group w-auto">
-                  <input type="search" class="form-control" placeholder="Type query" aria-label="Search" />
-                  <button class="btn btn-outline-primary" type="button" data-mdb-ripple-color="dark">
+              <li class="nav-item d-none d-sm-block" >
+                <form action="#/category" class="d-flex input-group w-auto">
+                  <input  id="search-bar-header" type="search" class="form-control" placeholder="Type query" aria-label="Search" />
+                  <button class="btn btn-outline-primary" type="submit" onclick="passValues()" data-mdb-ripple-color="dark">
                     Search
                   </button>
                 </form>
@@ -58,7 +58,7 @@
                   </a>
                 
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">SmartPhones</a></li>
+                    <li><a class="dropdown-item" href="#/smartphones">SmartPhones</a></li>
                     <li><a class="dropdown-item" href="#">Laptops</a></li>
                     <li><a class="dropdown-item" href="#">Desktop Computers</a></li>
                   </ul>
@@ -226,6 +226,13 @@
 
   <!-- MDB -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.js"></script>
+  <script>
+    function passValues(){
+      const val = document.getElementById('search-bar-header').value;
+      localStorage.setItem('textValue', val);
+      return false;
+    }
+  </script>
 </body>
 
 </html>

@@ -1,4 +1,6 @@
+import Card from "../components/Card.js";
 import Rating from "../components/rating.js";
+import { parseRequestUrl } from "../utils.js";
 
 const renderCard = (product) =>{
 return `
@@ -41,7 +43,6 @@ ${Rating.render({value: product.rating, text: product.numReviews + ' reviews'})}
 `
 }
 
-let temp = 1;
 const HomeScreen = {
     render: async ()  =>{
         const response = await fetch('http://localhost:3000/products',{
@@ -62,7 +63,7 @@ const HomeScreen = {
               <div class="bg-image hover-zoom ripple shadow-1-strong rounded">
                 <img src="./images/smartphones.jpg"
                   class="w-100" />
-                <a href="#!">
+                <a href="#/smartphones">
                   <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
                     <div class="d-flex flex-column-reverse h-100">
                       <h5 class="mb-3"><span class="text-white pt-2 ms-3 mt-3">Smartphones</span></h5>
@@ -116,16 +117,19 @@ const HomeScreen = {
     <h3 class="mb-4"> Smartphones </h3>
    ${products.map(product =>
   `${product.category === 'smartphones' ? `
-  ${renderCard(product)}`: ""}
+  ${Card.render(product)}`: ""}
 `).join("\n")}
+
+
+
 <h3 class="mb-4 mt-3"> Laptops </h3>
 ${products.map(product =>
   `${product.category === 'laptops' ? `
-  ${renderCard(product)}`: ""}`
+  ${Card.render(product)}`: ""}`
   ).join("\n")}
 </div>
 </div>
-</ul>`
+`
     }
 }
 

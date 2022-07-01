@@ -1,7 +1,8 @@
 const ContactScreen = {
     render: () => {
+      window.scrollTo(0,0);
         return `
-        <section class="h-100 gradient-custom">
+        <section class="h-100" style="background-color: #eee;">
         <div class="container py-5">
           <div class="row d-flex justify-content-center my-4">
             <div class="col-md-8">
@@ -89,9 +90,10 @@ const ContactScreen = {
                     <p class="text-white"><li><i class="mx-3 fas fa-map-marker-alt fa-2x"></i> San Francisco, CA 94126, USA</p>
                 </li>
                 <li>
-                    <p><i class=" fas fa-phone mt-4 fa-2x mx-3"></i> + 01 234 567 89</p>
+                    <p> <a href="tel:+4733378901" class="link-light"><i class=" fas fa-phone mt-4 fa-2x mx-3"></i> + 4733378901 </a></p>
                 </li>
-                <p> <li><i class="fas fa-envelope fa-2x mx-3"></i> contact@mdbootstrap.com</p>
+
+                <p> <li> <a href="mailto:webmaster@example.com"  class="link-light"> <i class="fas fa-envelope fa-2x mx-3"></i> contact@mdbootstrap.com</p> </a>
             </li>
             </ul>
                 </div>

@@ -1,4 +1,4 @@
-import getProduct from "../api.js";
+import {getProduct} from "../api.js";
 import { getCartItems, setCartItems } from "../localstorage.js";
 import { parseRequestUrl, rerender } from "../utils.js";
 
