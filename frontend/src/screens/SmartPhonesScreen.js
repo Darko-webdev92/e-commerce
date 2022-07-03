@@ -1,6 +1,8 @@
 import { getProductByCategory } from "../api.js";
 import Rating from "../components/rating.js";
+import Search from '../components/Search.js'
 const renderCard = (product) =>{
+    Search();  
     return `
     <div class="col-md-3 mb-4">
     <div class="card">

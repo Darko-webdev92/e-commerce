@@ -1,12 +1,11 @@
 import Rating from "./rating.js";
 const Card = {
     render: (product) => {
-        // if (!product.value) {
-        //     return '<div></div>';
-        // }
+
         return `
-<div class="col-md-3 mb-4">
+<div class="col-md-6 col-lg-3 col-sm-6 col-xs-6 mb-4">
 <div class="card">
+
 <div class="bg-image   hover-zoom ripple" data-mdb-ripple-color="light">
 <img  src="${product.thumbnail}"
 class="w-100 card-img-top"/>
@@ -35,8 +34,8 @@ class="w-100 card-img-top"/>
 <div class="ms-auto text-warning my-2">
 ${Rating.render({value: product.rating, text: product.numReviews + ' reviews'})}
 </div>
-<a href="#/product/${product.id}" class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark">Details</a>
-<a class="btn btn-outline-primary flex-fill ms-1">Add to Cart</a>
+<a href="#/product/${product.id}" class="btn btn-primary flex-fill me-1 mb-3" data-mdb-ripple-color="dark">Details</a>
+<a class="btn btn-outline-primary flex-fill ms-1 mb-3">Add to Cart</a>
 </div>
 </div>
 </div>

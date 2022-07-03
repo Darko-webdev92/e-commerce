@@ -1,11 +1,6 @@
 const Error404Screen = {
     render:() =>{
-        return `
-        
-        
-        
-        
-        `
+        return alert('Error');
     }
 }
 

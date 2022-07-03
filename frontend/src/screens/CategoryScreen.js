@@ -1,5 +1,8 @@
 import Rating from "../components/rating.js";
+import Search from '../components/Search.js'
+
 const renderCard = (product) =>{
+    const val = document.getElementById('search-bar-header').value = '';
     return `
     <div class="col-md-3 mb-4">
     <div class="card">
@@ -51,17 +54,17 @@ const CategoryScreen = {
             return '<div> Error in getting data </div>'
         }
         const products = await response.json();
-
+        Search();
         return `
 <div class="container my-5">
 <div class="row">
-<h3 class="mb-4"> Smartphones </h3>
+<h3 class="mb-4 my-5"> Smartphones </h3>
 ${products.filter(product => product.name.includes(localStorage.getItem('textValue'))).map(product =>
 `${product.category === 'smartphones' ? `
 ${renderCard(product)}`: ""}
 `).join("\n")}
 <h3 class="mb-4 mt-3"> Laptops </h3>
-${products.map(product =>
+${products.filter(product => product.name.includes(localStorage.getItem('textValue'))).map(product =>
 `${product.category === 'laptops' ? `
 ${renderCard(product)}`: ""}`
 ).join("\n")}

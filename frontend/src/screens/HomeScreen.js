@@ -72,7 +72,6 @@ const HomeScreen = {
                   <div class="hover-overlay">
                     <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
                   </div>
-
                 </a>
          
               </div>

@@ -5,6 +5,7 @@ import Error404Screen from "./screens/Error404Screen.js";
 import HomeScreen from "./screens/HomeScreen.js";
 import LaptopsScreen from "./screens/LaptopsScreen.js";
 import LoginScreen from "./screens/LoginScreen.js";
+import OrderScreen from "./screens/OrderScreen.js";
 import ProductScreen from "./screens/ProductScreen.js";
 import RegisterScreen from "./screens/RegisterScreen.js";
 import SmartPhonesScreen from "./screens/SmartphonesScreen.js";
@@ -20,7 +21,8 @@ const routes = {
     '/register': RegisterScreen,
     '/category': CategoryScreen,
     '/smartphones': SmartPhonesScreen,
-    '/laptops': LaptopsScreen
+    '/laptops': LaptopsScreen,
+    '/order': OrderScreen
 
 }
 

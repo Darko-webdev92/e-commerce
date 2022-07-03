@@ -1,6 +1,8 @@
+import Search from '../components/Search.js'
 const ContactScreen = {
     render: () => {
       window.scrollTo(0,0);
+      Search();
         return `
         <section class="h-100" style="background-color: #eee;">
         <div class="container py-5">

@@ -1,6 +1,8 @@
+import Search from '../components/Search.js'
 const RegisterScreen = {
     render: async  () =>{
       window.scrollTo(0,0);
+      Search();
        return `
        <section class="background-radial-gradient overflow-hidden mt-5 ">
        <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">

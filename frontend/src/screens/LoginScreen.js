@@ -1,7 +1,8 @@
-
+import Search from '../components/Search.js'
 const LoginScreen = {
     render: async  () =>{
       window.scrollTo(0,0);
+      Search();
        return `
        <section class="vh-100 mt-5">
        <div class="container-fluid h-custom">

@@ -1,6 +1,6 @@
 import {getProduct} from "../api.js";
 import { parseRequestUrl } from "../utils.js";
-
+import Search from '../components/Search.js'
  function mainImage(product){
    return` <div class="main_image">
     <img src="${product.thumbnail}" id="main_product_image" width="350">
@@ -18,6 +18,7 @@ const ProductScreen = {
         const request = parseRequestUrl();
         const product = await getProduct(request.id);
         window.scrollTo(0,0);
+        Search();
         return `
         <div class="container py-5 my-5">
         <div class="card">

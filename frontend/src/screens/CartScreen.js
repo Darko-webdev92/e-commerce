@@ -1,6 +1,7 @@
 import {getProduct} from "../api.js";
 import { getCartItems, setCartItems } from "../localstorage.js";
 import { parseRequestUrl, rerender } from "../utils.js";
+import Search from '../components/Search.js'
 
 const addToCart = (item,forceUpdate = false) =>{
     let cartItems = getCartItems();
@@ -27,7 +28,6 @@ const removeFromCart = (id) =>{
 }
 const CartScreen = {
     after_render: () =>{
-
     const deleteBtns = document.getElementsByClassName('del-button');
     Array.from(deleteBtns).forEach((deleteBtn) =>{
       deleteBtn.addEventListener('click', ()=>{
@@ -38,6 +38,7 @@ const CartScreen = {
     render: async () =>{
         const request = parseRequestUrl();
         window.scrollTo(0,0);
+        Search();  
         if(request.id){
             const product = await getProduct(request.id);
             addToCart({
