@@ -1,10 +1,11 @@
 import Search from '../components/Search.js'
 import Card from "../components/Card.js";
 import { getProducts } from "../api.js";
+import { parseRequestUrl, rerender } from '../utils.js';
+
 const CategoryScreen = {
     render: async  () =>{
         const products = await getProducts();
-        Search();   
         return `
 <div class="container my-5">
 <div class="row">
@@ -20,7 +21,20 @@ ${Card.render(product)}`: ""}`).join("\n")}
 </div>
 </div>
 </ul>`
-    }
+    },
+    after_render: async () =>{
+        const request = parseRequestUrl();
+        console.log(request);
+        if(request.resource === 'category'){
+            const searchBtn = document.getElementById('search-btn');
+            searchBtn.addEventListener('click',()=>{
+                Search();
+               rerender(CategoryScreen);
+            })
+
+        };
+},
 }
 
 export default CategoryScreen;
+

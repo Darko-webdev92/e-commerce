@@ -3,6 +3,8 @@ import { getCartItems, setCartItems } from "../localstorage.js";
 import { parseRequestUrl, rerender } from "../utils.js";
 import Search from '../components/Search.js'
 
+
+
 const addToCart = (item,forceUpdate = false) =>{
     let cartItems = getCartItems();
     const existItems = cartItems.find(x => x.product === item.product);
@@ -13,15 +15,20 @@ const addToCart = (item,forceUpdate = false) =>{
         cartItems = [...cartItems, item]
         const cartAmount = document.getElementById('cart-amount');
         cartAmount.innerHTML = cartItems.length;
-        rerender(CartScreen);
+        windowsReaload();
         
     }
 
     setCartItems(cartItems);
 }
 
+function windowsReaload(){
+  location.reload();
+}
+
 // change number of units for an item
 function changeNumberOfUnits(action, id) {
+ 
   cartItem = cartItem.map((item) => {
     if (item.product === id) {
       if (action === "minus" && item.quantity > 1) {
@@ -29,6 +36,7 @@ function changeNumberOfUnits(action, id) {
         rerender(CartScreen);
       } else if (action === "plus" && item.quantity < item.stock) {
         item.quantity++;
+
         rerender(CartScreen);
       }
     }
@@ -56,17 +64,21 @@ function changeNumberOfUnits(action, id) {
 
 function removeItemFromCart(id) {
   setCartItems(getCartItems().filter(x => x.product !== id))
-  if(id === parseRequestUrl().id){
-    // document.location.hash = '#/cart';
-    rerender(CartScreen);
-  }else{
-    rerender(CartScreen);
-  }
+  // if(id === parseRequestUrl().id){
+  //   // document.location.hash = '#/cart';
+  //   // rerender(CartScreen);
+  //   windowsReaload()
+  // }else{
+
+  //   windowsReaload();
+  // }
+  
+  windowsReaload();
 }
 
 let cartItem = getCartItems();
+let cartItem2 =  getCartItems();  
 console.log(cartItem);
-let temp = 1;
 const CartScreen = {
     after_render: () =>{
     // const deleteBtns = document.getElementsByClassName('del-button');
@@ -119,6 +131,7 @@ const CartScreen = {
         }
       
         const cartItem1 = JSON.parse(JSON.stringify( getCartItems()));
+        console.log(cartItem1);
         return (
             `
             <section class="h-100 gradient-custom">
@@ -127,10 +140,10 @@ const CartScreen = {
                 <div class="col-md-8">
                   <div class="card mb-4">
                     <div class="card-header py-3">
-                      <h5 class="mb-0">Cart - ${cartItem.length} items</h5>
+                      <h5 class="mb-0">Cart - ${cartItem1.length} items</h5>
                     </div>
                     <div class="card-body">
-                    ${cartItem.length == 0 ? '<div class="row"> </div>' : cartItem.map(item=>`
+                    ${cartItem.length == 0 ? '<div class="row"> </div>' : cartItem1.map((item,index)=>`
                     <!-- Single item -->
                     <div class="row">
                       <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
@@ -161,7 +174,7 @@ const CartScreen = {
                         <!-- Quantity -->
                         <div class="d-flex mb-4 ms-5" style="max-width: 300px">
                         <span class="btn btn-primary minus mx-4" id="btn-minus-${item.product}">-</span>
-                        <span class="number py-2">${item.quantity}</span>
+                        <span class="number py-2" id="number-${item.product}">${cartItem[index].quantity}</span>
                         <span class="btn btn-primary plus mx-4" id="btn-plus-${item.product}">+</span>           
                         </div>
 
@@ -220,7 +233,7 @@ const CartScreen = {
                           <div>
                           <span><strong>
                           ${cartItem1.length > 0 ? cartItem.reduce((prev,current)=> prev + current.quantity, 0) : ""}
-                          ${cartItem1.length == 1 ? `<span> item = </span>` : `<span> items </span>` } </span>
+                          ${cartItem1.length > 2 ? `<span> items = </span>` : `<span> item </span>` } </span>
                           ${cartItem1.length > 0 ? cartItem.reduce((prev,current)=> prev + current.price * current.quantity, 0) + " $": ''}
                           </strong></span>
                           </div>
