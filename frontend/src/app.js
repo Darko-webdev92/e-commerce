@@ -23,7 +23,6 @@ const routes = {
     '/smartphones': SmartPhonesScreen,
     '/laptops': LaptopsScreen,
     '/order': OrderScreen
-
 }
 
 const router =  async () =>{

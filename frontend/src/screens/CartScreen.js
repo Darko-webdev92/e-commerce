@@ -13,31 +13,97 @@ const addToCart = (item,forceUpdate = false) =>{
         cartItems = [...cartItems, item]
         const cartAmount = document.getElementById('cart-amount');
         cartAmount.innerHTML = cartItems.length;
+        rerender(CartScreen);
+        
     }
 
     setCartItems(cartItems);
 }
 
-const removeFromCart = (id) =>{
+// change number of units for an item
+function changeNumberOfUnits(action, id) {
+  cartItem = cartItem.map((item) => {
+    if (item.product === id) {
+      if (action === "minus" && item.quantity > 1) {
+        item.quantity--;
+        rerender(CartScreen);
+      } else if (action === "plus" && item.quantity < item.stock) {
+        item.quantity++;
+        rerender(CartScreen);
+      }
+    }
+
+    return {
+      ...item,
+    };
+  });
+
+  setCartItems(cartItem);
+  
+}
+
+
+// const removeFromCart = (id) =>{
+//   setCartItems(getCartItems().filter(x => x.product !== id))
+//   if(id === parseRequestUrl().id){
+//     document.location.hash = '#/cart';
+//   }else{
+//     rerender(CartScreen);
+//   }
+// }
+
+
+
+function removeItemFromCart(id) {
   setCartItems(getCartItems().filter(x => x.product !== id))
   if(id === parseRequestUrl().id){
-    document.location.hash = '#/cart';
+    // document.location.hash = '#/cart';
+    rerender(CartScreen);
   }else{
     rerender(CartScreen);
   }
 }
+
+let cartItem = getCartItems();
+console.log(cartItem);
+let temp = 1;
 const CartScreen = {
     after_render: () =>{
-    const deleteBtns = document.getElementsByClassName('del-button');
-    Array.from(deleteBtns).forEach((deleteBtn) =>{
-      deleteBtn.addEventListener('click', ()=>{
-        removeFromCart(deleteBtn.id)
+    // const deleteBtns = document.getElementsByClassName('del-button');
+    // Array.from(deleteBtns).forEach((deleteBtn) =>{
+    //   deleteBtn.addEventListener('click', ()=>{
+    //     removeFromCart(deleteBtn.id)
+    //   })
+    // })
+    const btnsMinus = document.querySelectorAll('.minus');
+    btnsMinus.forEach(btn =>{
+      btn.addEventListener('click', function() {
+        changeNumberOfUnits('minus', Number(btn.getAttribute('id').charAt(10)))
+        console.log(btn);
+        
+      });
+    })
+
+    const plusBtns = document.querySelectorAll('.plus');
+    plusBtns.forEach(btn =>{
+      btn.addEventListener('click', function() {
+        changeNumberOfUnits('plus', Number(btn.getAttribute('id').charAt(9)))
+        
+      });
+    })
+
+    const delBtns = document.querySelectorAll('.del-button');
+    delBtns.forEach(btn =>{
+      btn.addEventListener('click',function(){
+        console.log(Number(btn.getAttribute('id').charAt(8)));
+        removeItemFromCart(Number(btn.getAttribute('id').charAt(8)));
       })
     })
     },
     render: async () =>{
         const request = parseRequestUrl();
         window.scrollTo(0,0);
+        window.location.href = '#/cart';
         Search();  
         if(request.id){
             const product = await getProduct(request.id);
@@ -51,14 +117,8 @@ const CartScreen = {
                 quantity: 1
             })
         }
-        // return (
-        //     `<div> Cart Screen </div>
-        //     <div>${getCartItems().length}</div>
-        //     `
-            
-        // )
-
-        const cartItem = getCartItems();
+      
+        const cartItem1 = JSON.parse(JSON.stringify( getCartItems()));
         return (
             `
             <section class="h-100 gradient-custom">
@@ -90,32 +150,22 @@ const CartScreen = {
                         <p><strong><a href="#/product/${item.product}">${item.name} </a></strong></p>
                         <p>${item.description}</p>
                         <p>${item.stock}</p>
-                        <button type="button" class="del-button btn btn-primary btn-sm me-1 mb-2 " id="${item.product}" data-mdb-toggle="tooltip"
+                        <button type="button" class="del-button btn btn-primary btn-sm me-1 mb-2 " id="del-btn-${item.product}" data-mdb-toggle="tooltip"
                           title="Remove item">
                           <i class="fas fa-trash"></i>
                         </button>
                         <!-- Data -->
                       </div>
       
-
                       <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                         <!-- Quantity -->
-                        <div class="d-flex mb-4" style="max-width: 300px">
-                          <button class="btn btn-primary px-3 me-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                            <i class="fas fa-minus"></i>
-                          </button>
-        
-                          <div class="form-outline">
-                            <input id="form1" min="1" name="quantity" max="${item.stock}" value="1" type="number" class="form-control px-3" />
-                            <label class="form-label mx-3" for="form1">Quantity</label>
-                          </div>
-        
-                          <button class="btn btn-primary px-3 ms-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepUp();">
-                            <i class="fas fa-plus"></i>
-                          </button>
+                        <div class="d-flex mb-4 ms-5" style="max-width: 300px">
+                        <span class="btn btn-primary minus mx-4" id="btn-minus-${item.product}">-</span>
+                        <span class="number py-2">${item.quantity}</span>
+                        <span class="btn btn-primary plus mx-4" id="btn-plus-${item.product}">+</span>           
                         </div>
+
+                        
                         <!-- Quantity -->
         
                         <!-- Price -->
@@ -130,7 +180,7 @@ const CartScreen = {
                     <hr class="my-4" />
         
                     <!-- Single item -->
-                    `)
+                    `).join("\n")
 }
                     </div>
                   </div>
@@ -169,9 +219,9 @@ const CartScreen = {
                           </div>
                           <div>
                           <span><strong>
-                          ${cartItem.length > 0 ? cartItem.reduce((prev,current)=> prev + current.quantity, 0) : ""}
-                          ${cartItem.length == 1 ? `<span> item = </span>` : `<span> items </span>` } </span>
-                          ${cartItem.length > 0 ? cartItem.reduce((prev,current)=> prev + current.price * current.quantity, 0) + " $": ''}
+                          ${cartItem1.length > 0 ? cartItem.reduce((prev,current)=> prev + current.quantity, 0) : ""}
+                          ${cartItem1.length == 1 ? `<span> item = </span>` : `<span> items </span>` } </span>
+                          ${cartItem1.length > 0 ? cartItem.reduce((prev,current)=> prev + current.price * current.quantity, 0) + " $": ''}
                           </strong></span>
                           </div>
                         </li>

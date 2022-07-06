@@ -1,17 +1,14 @@
 import {getProduct} from "../api.js";
-import { parseRequestUrl } from "../utils.js";
+import { parseRequestUrl, rerender } from "../utils.js";
 import Search from '../components/Search.js'
+import CartScreen from "./CartScreen.js";
  function mainImage(product){
    return` <div class="main_image">
     <img src="${product.thumbnail}" id="main_product_image" width="350">
     </div>
     `
 }
-function changeImage(element){
-    var main_prodcut_image = document.getElementById('main_product_image');
 
-    main_prodcut_image.src = element.src;
-}
 
 const ProductScreen = {
      render: async  () =>{
@@ -67,7 +64,7 @@ const ProductScreen = {
             </div>
             <div class="buttons d-flex flex-row mt-5 gap-3">
             <button class="btn btn-outline-primary">Buy Now</button>
-            <button  id="add-button" class="btn btn-primary">Add to Basket</button>	
+            <button  id="add-button" class="btn btn-primary">Add to Card </button>	
             </div>
             <div class="search-option bg-primary">	<i class='bx bx-search-alt-2 first-search'></i>	
             <div class="inputs"><input type="text" name="" placeholder="Search">	
@@ -84,8 +81,10 @@ const ProductScreen = {
         const request = parseRequestUrl();
         console.log(request);
     document.getElementById("add-button").addEventListener('click',()=>{
-        document.location.hash = `#/cart/${request.id}`;
-    })},
+      
+        document.location.hash = `#/cart/${request.id}`;    
+    })
+},
 }
 
 export default  ProductScreen;
