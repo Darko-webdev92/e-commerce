@@ -1,1 +1,1 @@
-vo json file-ot moze da dodadam reviews
+npm run json:server 
