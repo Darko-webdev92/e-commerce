@@ -1,6 +1,7 @@
 import { getProductByCategory } from "../api.js";
 import Rating from "../components/rating.js";
 import Search from '../components/Search.js'
+import Card from "../components/Card.js";
 const renderCard = (product) =>{
     Search();  
     return `
@@ -43,17 +44,18 @@ const renderCard = (product) =>{
     `
     }
 
-const SmartPhonesScreen = {
+const DesktopsScreen = {
     render: async () =>{
-        const products = await getProductByCategory('smartphones');
+        const products = await getProductByCategory('desktops');
+        Search();
         return `
         <div class="container py-5 my-5">
         <div class="row">
-        <h3 class="mb-4 text-center"> Smartphones </h3>
-       ${products.map(product =>
-      `${product.category === 'smartphones' ? `
-      ${renderCard(product)}`: ""}
-    `).join("\n")}
+    <h3 class="mb-4 mt-3 text-center"> Laptops </h3>
+    ${products.map(product =>
+      `${product.category === 'desktops' ? `
+      ${Card.render(product)}`: ""}`
+      ).join("\n")}
     </div>
     </div>
         `
@@ -61,5 +63,6 @@ const SmartPhonesScreen = {
     after_render: async () =>{
       
     },
+
 }
-export default SmartPhonesScreen;
+export default DesktopsScreen;

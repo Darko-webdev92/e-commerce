@@ -191,9 +191,45 @@
             "https://dummyjson.com/image/i/products/10/3.jpg",
             "https://dummyjson.com/image/i/products/10/thumbnail.jpeg"
           ]
+        },
+        {
+          "id": 11,
+          "name": "DELL Vostro 3681 SFF (i3, 8Gb, 256Gb SSD, Ubuntu)",
+          "description": "Intel Core i3-10100 Processor (3.60GHz, 4.30GHz w/Turbo, 6Mb Cache, 4 Cores)",
+          "price": 400,
+          "discountPercentage": 20,
+          "rating": 4.43,
+          "numReviews": 9,
+          "stock": 89,
+          "brand": "DELL",
+          "category": "desktops",
+          "thumbnail": "https://cenovnik.centardell.mk/images/vostro3681.jpg",
+          "images": [
+            "https://dummyjson.com/image/i/products/10/1.jpg",
+            "https://dummyjson.com/image/i/products/10/2.jpg",
+            "https://dummyjson.com/image/i/products/10/3.jpg",
+            "https://dummyjson.com/image/i/products/10/thumbnail.jpeg"
+          ]
+        },
+        {
+          "id": 12,
+          "name": "DELL Vostro 3681 SFF (i3, 8Gb, 256Gb SSD, Ubuntu)",
+          "description": "Intel Core i3-10100 Processor (3.60GHz, 4.30GHz w/Turbo, 6Mb Cache, 4 Cores)",
+          "price": 330,
+          "discountPercentage": 10,
+          "rating": 4.43,
+          "numReviews": 9,
+          "stock": 89,
+          "brand": "DELL",
+          "category": "desktops",
+          "thumbnail": "https://setec.mk/image/cache/catalog/Product/49438_0-1000x1000.jpg",
+          "images": [
+            "https://dummyjson.com/image/i/products/10/1.jpg",
+            "https://dummyjson.com/image/i/products/10/2.jpg",
+            "https://dummyjson.com/image/i/products/10/3.jpg",
+            "https://dummyjson.com/image/i/products/10/thumbnail.jpeg"
+          ]
         }
     ]
     }
-
-
     

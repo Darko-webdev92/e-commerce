@@ -1,6 +1,7 @@
 import CartScreen from "./screens/CartScreen.js";
 import CategoryScreen from "./screens/CategoryScreen.js";
 import ContactScreen from "./screens/ContactScreen.js";
+import DesktopsScreen from "./screens/DesktopsScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";
 import HomeScreen from "./screens/HomeScreen.js";
 import LaptopsScreen from "./screens/LaptopsScreen.js";
@@ -22,7 +23,9 @@ const routes = {
     '/category': CategoryScreen,
     '/smartphones': SmartPhonesScreen,
     '/laptops': LaptopsScreen,
+    '/desktops': DesktopsScreen,
     '/order': OrderScreen
+
 }
 
 const router =  async () =>{

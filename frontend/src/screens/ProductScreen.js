@@ -1,7 +1,6 @@
 import {getProduct} from "../api.js";
 import { parseRequestUrl, rerender } from "../utils.js";
 import Search from '../components/Search.js'
-import CartScreen from "./CartScreen.js";
  function mainImage(product){
    return` <div class="main_image">
     <img src="${product.thumbnail}" id="main_product_image" width="350">

@@ -89,6 +89,9 @@ const OrderScreen = {
 <!-- Section: Design Block -->
         `
     },
+        after_render: async () =>{
+      
+    },
 }
 
 export default OrderScreen;

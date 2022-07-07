@@ -90,8 +90,14 @@ const CartScreen = {
     const btnsMinus = document.querySelectorAll('.minus');
     btnsMinus.forEach(btn =>{
       btn.addEventListener('click', function() {
-        changeNumberOfUnits('minus', Number(btn.getAttribute('id').charAt(10)))
-        console.log(btn);
+        const id = Number(btn.getAttribute('id').substring(10));
+        console.log(id);
+        if(id >= 10){
+          changeNumberOfUnits('minus', id)
+        }else{
+             changeNumberOfUnits('minus', Number(btn.getAttribute('id').charAt(10)))
+        }
+        // changeNumberOfUnits('minus', Number(btn.getAttribute('id').charAt(10)))
         
       });
     })
@@ -99,16 +105,29 @@ const CartScreen = {
     const plusBtns = document.querySelectorAll('.plus');
     plusBtns.forEach(btn =>{
       btn.addEventListener('click', function() {
-        changeNumberOfUnits('plus', Number(btn.getAttribute('id').charAt(9)))
-        
+        const id = Number(btn.getAttribute('id').substring(9));
+        console.log(id);
+        if(id >= 10){
+          changeNumberOfUnits('plus', id)
+        }else{
+             changeNumberOfUnits('plus', Number(btn.getAttribute('id').charAt(9)))
+        }
+        // changeNumberOfUnits('plus', Number(btn.getAttribute('id').charAt(9)))
       });
     })
 
     const delBtns = document.querySelectorAll('.del-button');
     delBtns.forEach(btn =>{
       btn.addEventListener('click',function(){
-        console.log(Number(btn.getAttribute('id').charAt(8)));
-        removeItemFromCart(Number(btn.getAttribute('id').charAt(8)));
+        const id = Number(btn.getAttribute('id').substring(8));
+        console.log(id);
+        if(id >= 10){
+            removeItemFromCart(id);
+        }else{
+            removeItemFromCart(Number(btn.getAttribute('id').charAt(8)));
+        }
+        // console.log(Number(btn.getAttribute('id').charAt(8)));
+        // removeItemFromCart(Number(btn.getAttribute('id').charAt(8)));
       })
     })
     },

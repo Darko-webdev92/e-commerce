@@ -47,7 +47,7 @@ const HomeScreen = {
             <div class="bg-image hover-zoom ripple shadow-1-strong rounded">
               <img src="./images/computers.webp"
                 class="w-100" />
-              <a href="#!">
+              <a href="#/desktops">
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
                   <div class="d-flex flex-column-reverse h-100">
                     <h5 class="mb-3"><span class="text-white pt-2 ms-3 mt-3">Desktop Computers</span></h5>

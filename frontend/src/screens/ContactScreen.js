@@ -106,6 +106,9 @@ const ContactScreen = {
       </section>
         `
     },
+    after_render: async () =>{
+      
+    },
 }
 
 export default ContactScreen;

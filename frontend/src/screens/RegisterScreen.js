@@ -99,6 +99,9 @@ const RegisterScreen = {
      </div>
      </<section>
        `
-    }
+    },
+    after_render: async () =>{
+      
+    },
 }
 export default RegisterScreen;

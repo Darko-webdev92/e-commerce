@@ -69,6 +69,9 @@ const LoginScreen = {
        </div>
      </section>
        `
-    }
+    },
+    after_render: async () =>{
+      
+    },
 }
 export default LoginScreen;
