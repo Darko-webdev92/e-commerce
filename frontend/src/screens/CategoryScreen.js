@@ -10,13 +10,18 @@ const CategoryScreen = {
 <div class="container my-5">
 <div class="row">
 <h3 class="mb-4 my-5"> Smartphones </h3>
-${products.filter(product => product.name.includes(localStorage.getItem('textValue'))).map(product =>
+${products.filter(product => product.name.toLowerCase().includes(localStorage.getItem('textValue').toLowerCase())).map(product =>
 `${product.category === 'smartphones' ? `
 ${Card.render(product)}`: ""}`).join("\n")}
 
 <h3 class="mb-4 mt-3"> Laptops </h3>
-${products.filter(product => product.name.includes(localStorage.getItem('textValue'))).map(product =>
+${products.filter(product => product.name.toLowerCase().includes(localStorage.getItem('textValue').toLowerCase())).map(product =>
 `${product.category === 'laptops' ? `
+${Card.render(product)}`: ""}`).join("\n")}
+
+<h3 class="mb-4 mt-3"> Desktops </h3>
+${products.filter(product => product.name.toLowerCase().includes(localStorage.getItem('textValue').toLowerCase())).map(product =>
+`${product.category === 'desktops' ? `
 ${Card.render(product)}`: ""}`).join("\n")}
 </div>
 </div>
